@@ -1,0 +1,20 @@
+{
+  "name": "Project_4_Lalitha-Sophal-group",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ld222/Project_4_Lalitha-Sophal-group.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ld222/Project_4_Lalitha-Sophal-group/issues"
+  },
+  "homepage": "https://github.com/ld222/Project_4_Lalitha-Sophal-group#readme"
+}

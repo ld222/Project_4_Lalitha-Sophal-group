@@ -6,7 +6,8 @@ id SERIAL PRIMARY KEY,
 firstname VARCHAR(255) NOT NULL,
 lastname VARCHAR(255) NOT NULL,
 email VARCHAR(255) NOT NULL UNIQUE,
-password VARCHAR(255) NOT NULL
+password CHAR(60) NOT NULL,
+created_at TIMESTAMPTZ DEFAULT now()
 );
 
 CREATE TABLE schedules (
@@ -15,6 +16,8 @@ id_user INT NOT NULL,
 day SMALLINT NOT NULL,
 start_at TIME  NOT NULL,
 end_at TIME NOT NULL,
+created_at TIMESTAMPTZ DEFAULT now(),
+CONSTRAINT fk_user
 FOREIGN KEY (id_user) 
 REFERENCES users(id) 
 ON DELETE CASCADE

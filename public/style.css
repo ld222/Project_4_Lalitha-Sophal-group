@@ -9,6 +9,13 @@
 
 body{
     background-color: var(--background-color);
+    
+    width: 100vw;
+    height: 100vh;
+}
+main{
+    padding: 20rem, 20rem;
+    margin: 30%, 30%;
 }
 .h1{
     color: var(--text-color);

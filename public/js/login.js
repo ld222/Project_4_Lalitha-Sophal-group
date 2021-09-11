@@ -29,7 +29,7 @@ login.addEventListener('submit', async (e) => {
             }
         }
 
-        if(data.email) {
+        if(data.cleanedEmail) {
             location.assign('/');
         }
     }

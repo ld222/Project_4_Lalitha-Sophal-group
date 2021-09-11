@@ -103,43 +103,12 @@ const createToken = (email) => {
 
 /* Signup form */
 module.exports.signup_get = (req, res ) => {
-    const token = req.cookies.jwt;
-
-    if(token) {
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
-            if(err) {
-                console.log(err);
-                res.render('pages/signup');
-            }
-            else {
-                res.redirect('/');
-            }
-        })
-    }
-    else {
-        res.render('pages/signup');
-    }
-
+    res.render('pages/signup');
 }
 
 /* Login form */
 module.exports.login_get = (req, res ) => {
-    const token = req.cookies.jwt;
-
-    if(token) {
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
-            if(err) {
-                console.log(err);
-                res.render('pages/login');
-            }
-            else {
-                res.redirect('/');
-            }
-        })
-    }
-    else {
-        res.render('pages/login');
-    }
+    res.render('pages/login');
 }
 
 /* Accept data from the signup form and signup user if fields are valid */
@@ -174,14 +143,15 @@ module.exports.signup_post = (req, res ) => {
 /* Accept data from the login form and check if credentials/fields are valid */
 module.exports.login_post = (req, res ) => {
     const { email, password} = req.body;
+    const cleanedEmail = email.toLowerCase().trim();
 
-    const errors = handleErrorLogin(email, password)
+    const errors = handleErrorLogin(cleanedEmail, password)
     .then( errors => {
         if(errors.email === '' && errors.password === '' && errors.credentials === '')
         {   
-            const token = createToken(email);
+            const token = createToken(cleanedEmail);
             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-            res.status(201).json({ email });
+            res.status(201).json({ cleanedEmail });
         }
         else {
             res.status(400).json({ errors });

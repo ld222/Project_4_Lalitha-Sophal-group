@@ -22,6 +22,27 @@ const requireAuth = (req, res, next) => {
     }
 }
 
+// Check if the user is already logged in, redirect to home if they are already logged
+const alreadyAuth = (req, res, next) => {
+    const token = req.cookies.jwt;
+
+    if(token) {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
+            if(err) {
+                console.log(err);
+                next();
+            }
+            else {
+                res.redirect('/');
+            }
+        })
+    }
+    else {
+        next();
+    }
+}
+
+
 // Check which user is  currently logged in
 const checkUser =  (req, res, next) => {
     const token = req.cookies.jwt; 
@@ -46,4 +67,4 @@ const checkUser =  (req, res, next) => {
 
 };
 
-module.exports =  {requireAuth, checkUser };
+module.exports =  {requireAuth, alreadyAuth, checkUser };

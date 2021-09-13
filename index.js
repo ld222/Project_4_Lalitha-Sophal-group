@@ -5,12 +5,12 @@ const app = express() // initialise the app
 // const morgan = require('morgan')
 const router = express.Router() // router for different requests
 const path = require('path') // for static files in public
-const db = require('./database') // database variable
+
 
 const mainRouter = require('./router/main')
 
 // Set static folder
-app.use(express.static(__dirname + 'public'));
+app.use(express.static('public'));
 
 // Middleware
 // app.use(morgan('dev'))

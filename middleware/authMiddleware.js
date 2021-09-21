@@ -43,8 +43,8 @@ const alreadyAuth = (req, res, next) => {
 }
 
 
-// Check which user is  currently logged in
-const checkUser =  (req, res, next) => {
+// Check which user is currently logged in
+const checkUser = (req, res, next) => {
     const token = req.cookies.jwt; 
 
     if(token) {
@@ -64,7 +64,30 @@ const checkUser =  (req, res, next) => {
         res.locals.email = null;
         next();
     }
-
 };
 
-module.exports =  {requireAuth, alreadyAuth, checkUser };
+const checkUserSchedule = (req, res, next) => {
+    const token = req.cookies.jwt; 
+
+    if(token) {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decodedToken) =>{
+            if(err) {
+                console.log(err.message);
+                res.locals.user = null;
+                next();
+            }
+            else {
+                const user = await db.oneOrNone('SELECT id FROM Users WHERE email = $1', [decodedToken.email]);
+                res.locals.user = user;
+                next();
+            }
+        })
+    }
+    else {
+        res.locals.user = null;
+        next();
+    }
+};
+
+
+module.exports =  {requireAuth, alreadyAuth, checkUserSchedule, checkUser };

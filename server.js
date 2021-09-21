@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const routes = require('./router/routes');
+const mainRoutes = require('./router/mainRoutes');
 const authRoutes = require('./router/authRoutes');
 
 const PORT = process.env.PORT || 3000;
@@ -14,8 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine', 'ejs');
 
-app.use(routes);
+app.use(mainRoutes);
 app.use(authRoutes);
+
 
 app.listen(PORT, () => {
     if(process.env.PORT) {

@@ -4,17 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "create_db": "psql -U postgres -f sql/create_db.sql",
-    "createt_ables": "psql -U postgres -d incode_project_04 -f sql/create_tables.sql",
-    "seed_tables": "psql -U postgres -d incode_project_04 -f sql/seed_tables.sql",
+    "create-db": "psql -U postgres -f sql/create_db.sql",
+    "create-tables": "psql -U postgres -d incode_project_04 -f sql/create_tables.sql",
+    "seed-tables": "psql -U postgres -d incode_project_04 -f sql/seed_tables.sql",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "flatpickr": "^4.6.9",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12",
     "pg-promise": "^10.11.0"

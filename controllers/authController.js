@@ -1,5 +1,5 @@
 const db = require('../postgresql');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -156,7 +156,6 @@ module.exports.login_post = (req, res ) => {
         else {
             res.status(400).json({ errors });
         }
-
     })
 }
 

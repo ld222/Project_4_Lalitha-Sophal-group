@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <% const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %>
     <%- include('../partials/header') %>
     <body>        
         <div class="container mt-2"></div>
@@ -10,18 +11,29 @@
                 </div>                
             </header>
             <div class="md-form">        
-                <form action="/schedule" method="post">
+                <form id="schedules" action="/schedules" method="post">
                     <div>
-                        <label for="day">Day:</label>
-                        <select id="day" type="text" name="day" required></select>
+                        <label for="day">Day</label>
+                        <select name="day" id="day">
+                            <option value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">Wednesday</option>
+                            <option value="4">Thursday</option>
+                            <option value="5">Friday</option>
+                            <option value="6">Saturday</option>
+                            <option value="7">Sunday</option>
+                        </select>
+                        <div class="errorMessage day">&nbsp;</div>
                     </div>
                     <div>
-                        <label for="starttime">Start_at: </label>
-                        <input placeholder="Selected time" type="text" id="input-starttime" class="form-control timepicker">
+                        <label for="starttime">Start</label>
+                        <input placeholder="Selected time" type="time" name="starttime" id="starttime" class="form-control timepicker">
+                        <div class="errorMessage starttime">&nbsp;</div>
                     </div>
                     <div>
-                        <label for="endtime">End_at: </label>
-                        <input placeholder="Selected time" type="text" id="input-endtime" class="form-control timepicker">
+                        <label for="endtime">End</label>
+                        <input placeholder="Selected time" type="time" name="endtime" id="endtime" class="form-control timepicker">
+                        <div class="errorMessage endtime">&nbsp;</div>
                     </div>
                     <div>
                         <button id="submit" type="submit">Create</button>
@@ -30,16 +42,26 @@
             </div><br><br>
             <main>
                 <div>
-                    <% schedules.forEach(schedule => { %>
-                        <p><strong>Day: </strong><%= schedule.day %></p>
-                        <p><strong>Start_at: </strong><%= schedule.start_at %></p>
-                        <p><strong>End_at: </strong><%= schedule.end_at %></p>
-                    <% }) %>              
+                    <table>
+                        <tr>
+                            <th>Day</th>
+                            <th>Start</th>
+                            <th>End</th>
+                        </tr>
+                        <% schedules.forEach(schedule => { %>
+                            <tr>
+                                <td><%= days[schedule.day-1] %></td>
+                                <td><%= schedule.start_at %></td>
+                                <td><%= schedule.end_at %></td>
+                            </tr>
+                        <% }) %> 
+                    </table>             
                 </div>
             </main>                        
         </div>        
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>                    
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+        <script src="/js/schedules.js"></script>
     </body>    
 </html>
